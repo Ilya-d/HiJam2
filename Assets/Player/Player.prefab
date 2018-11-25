@@ -319,7 +319,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8659723acad0d4541a6054dc4fdf40cd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f2ef2e0c67a816c449d64cd5ec4e3479, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.129
   m_Pitch: 1
@@ -447,15 +447,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handRb: {fileID: 50662694621728690}
   handContainer: {fileID: 4880509710078504}
-  force: 400
+  stepsSound: {fileID: 0}
+  force: 285
   impulse: 0
   playerNo: 0
   speed: 10
-  maxHealth: 100
-  maxEnergy: 100
-  energyDecreaseSpeed: 15
-  energyHitCost: 20
-  energyRegen: 10
+  maxHealth: 400
+  maxEnergy: 150
+  energyDecreaseSpeed: 12
+  energyHitCost: 10
+  energyRegen: 8
   multEnergy: 4
   speedDebuf: 0.7
   healthBar: {fileID: 0}
