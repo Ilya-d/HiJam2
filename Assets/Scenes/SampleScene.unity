@@ -615,6 +615,10 @@ Prefab:
       propertyPath: m_TagString
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 1393043914300716, guid: 90ef3014b563f954e80035f6d74208d2, type: 2}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
     - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
         type: 2}
       propertyPath: m_Enabled
