@@ -50,15 +50,27 @@ public class CameraBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float move = speed * Time.deltaTime;
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(((player1.transform.position.x + player2.transform.position.x)/2), ((player1.transform.position.y + player2.transform.position.y)/2), -10f), move);
+        var targetCameraPos = transform.position;
+        if (player1 != null && player2 != null) {
+            targetCameraPos = (player1.position + player2.position) / 2;
+        } else if (player1 != null) {
+            targetCameraPos = player1.position;
+        } else if (player2 != null) {
+            targetCameraPos = player2.position;
+        }
 
-        if (player1 == null || player2 == null || Vector3.Distance(player1.transform.position, player2.transform.position) <= 18f)
+        targetCameraPos.z = transform.position.z;
+
+        gameObject.transform.position = Vector3.MoveTowards(transform.position, targetCameraPos, move);
+
+
+        if (player1 == null || player2 == null || Vector3.Distance(player1.position, player2.position) <= 18f)
         {
             cameraSize = 10f;
         }
-        else if (Vector3.Distance(player1.transform.position, player2.transform.position) > 18f && Vector3.Distance(player1.transform.position, player2.transform.position) < 36f)
+        else if (Vector3.Distance(player1.position, player2.position) > 18f && Vector3.Distance(player1.position, player2.position) < 36f)
         {
-            cameraSize = (Vector3.Distance(player1.transform.position, player2.transform.position)) / 1.8f;
+            cameraSize = (Vector3.Distance(player1.position, player2.position)) / 1.8f;
         }
         else {
             cameraSize = 20f;
