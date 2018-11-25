@@ -1563,7 +1563,7 @@ Prefab:
     - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
         type: 2}
       propertyPath: sounds.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4822156346019386, guid: 045f645908d144d4e90ee9dc40caafab, type: 2}
       propertyPath: m_RootOrder
@@ -1582,17 +1582,17 @@ Prefab:
     - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
         type: 2}
       propertyPath: sounds.Array.data[3].name
-      value: StepForest1
+      value: HitBodyWithWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
         type: 2}
       propertyPath: sounds.Array.data[3].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 8659723acad0d4541a6054dc4fdf40cd, type: 3}
+      objectReference: {fileID: 8300000, guid: c9ff661bcab3165479ea0406f5c1bcfc, type: 3}
     - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
         type: 2}
       propertyPath: sounds.Array.data[3].volume
-      value: 0.573
+      value: 0.608
       objectReference: {fileID: 0}
     - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
         type: 2}
@@ -1602,7 +1602,7 @@ Prefab:
     - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
         type: 2}
       propertyPath: sounds.Array.data[3].loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 045f645908d144d4e90ee9dc40caafab, type: 2}

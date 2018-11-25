@@ -9,6 +9,7 @@ public class HitCollision : MonoBehaviour {
         if (col.gameObject.tag == "Player1" || col.gameObject.tag == "Player2") {
             float speed = GetComponent<Rigidbody2D>().velocity.magnitude;   
             col.gameObject.GetComponent<Player>().Hit(speed);
+            FindObjectOfType<AudioManager>().Play("HitBodyWithWeapon");
         }
     }
 }
