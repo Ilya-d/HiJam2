@@ -12,6 +12,7 @@ public class ResourceManager : Singletone<ResourceManager> {
 
     [SerializeField] private Weapon[] weaponsList;
     [SerializeField] private UsableItem[] weaponsPickups;
+    [SerializeField] private UsableItem playerPickup;
     [SerializeField] private Player playerPrefab;
 
 
@@ -28,6 +29,10 @@ public class ResourceManager : Singletone<ResourceManager> {
         switch (itemType) {
             case UsableItem.ItemType.Weapon:
                 Instantiate(weaponsPickups[value], position, Quaternion.identity);
+                break;
+            case UsableItem.ItemType.Player:
+                var usableItem = Instantiate(playerPickup, position, Quaternion.identity);
+                usableItem.value = value;
                 break;
             /*case UsableItem.ItemType.Health:
                 break;
