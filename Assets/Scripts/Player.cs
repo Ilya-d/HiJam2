@@ -39,7 +39,7 @@ public class Player : Unit {
 
     [Header("Настройки энергии")]
     public float maxEnergy = 100;
-    private float currentEnergy;
+    public float currentEnergy;
     [SerializeField] private float energyDecreaseSpeed = 10f;
     [SerializeField] private float energyHitCost = 15f;
     [SerializeField] private float energyRegen = 10f;
@@ -48,13 +48,6 @@ public class Player : Unit {
 
     private bool hitAvailable = true;
     private bool atacking = false;
-
-    [Header("Настройки UI")]
-    [SerializeField] private Image healthBar;
-    [SerializeField] private Image energyBar;
-    [SerializeField] private Color fullHealth;
-    [SerializeField] private Color halfHealth;
-    [SerializeField] private Color lowHealth;
 
     private Weapon currentWeapon;
     private ResourceManager.WeaponType currentWeaponType;
@@ -99,7 +92,6 @@ public class Player : Unit {
     }
 
     private void Update() {
-        CalculateUI();
         CheckEnergy();
         UseButton();
     }
@@ -139,15 +131,6 @@ public class Player : Unit {
         }
         currentWeapon = ResourceManager.instance.CreateWeapon(weapon, handContainer);
         currentWeaponType = weapon;
-    }
-
-    private void CalculateUI() {
-        /*healthBar.fillAmount = currentHealth / maxHealth;
-        energyBar.fillAmount = currentEnergy / maxEnergy;
-
-        if (healthBar.fillAmount < 0.2) healthBar.color = lowHealth;
-        else if (healthBar.fillAmount < 0.6) healthBar.color = halfHealth;
-        else healthBar.color = fullHealth;*/
     }
 
     private void UseButton() {
