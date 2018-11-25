@@ -14,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour {
     private Player[] players;
 
     private bool isMoving;
-    private bool isAttacking;
+    private bool isAttacking = false;
 
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Sprite imageLeft;
@@ -30,12 +30,10 @@ public class EnemyBehaviour : MonoBehaviour {
     float distanceToTarget;
 
     private void Start() {
-        players = new Player[2];
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
-        //Так совсем не надо делать
-        players[0] = GameObject.FindGameObjectWithTag("Player1").GetComponent<Player>();
-        players[1] = GameObject.FindGameObjectWithTag("Player2").GetComponent<Player>();
+
+        players = FindObjectsOfType<Player>();
     }
 
     void Update () {
@@ -45,32 +43,25 @@ public class EnemyBehaviour : MonoBehaviour {
         }
 
         distanceToTarget = Vector2.Distance(transform.position, target.position);
-        if (distanceToTarget > 1.2f) {
+        
+        if (distanceToTarget > 1.2f && !isAttacking) {
             Move(target);
         }
-        else {
+        else if (!isAttacking) {
             Hit();
         }
-       
     }
 
     private void Hit() {
         animator.SetBool("Walk", false);
-        if(!isAttacking) {
-            StartCoroutine(waitForHit());
-        }
-        
+        StartCoroutine(waitForHit());
     }
 
     IEnumerator waitForHit() {
         isAttacking = true;
         while (distanceToTarget < 1.2f) {
-            
-            //ВОТ СЮДА ВСТАВЛЯТЬ МУЗЫКУ
 
-            currentPlayer.Hit(damage);
             yield return new WaitForSeconds(attackCooldown);
-            animator.SetBool("Walk", false);
         }
         isAttacking = false;
         animator.SetBool("Walk", true);
@@ -118,5 +109,9 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         source.clip = walkSounds[Random.Range(0, walkSounds.Length)];
         source.Play();
+    }
+
+    public void OnEnemyHit() {
+        currentPlayer.Hit(damage);
     }
 }

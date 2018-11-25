@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048156257073798}
   m_LocalRotation: {x: -0, y: -0, z: -0.00000008940697, w: 1}
-  m_LocalPosition: {x: 0.29, y: 0.73000026, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4945536396534138}
@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350015156053072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.9, z: 0}
+  m_LocalPosition: {x: -0, y: 1.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4380936106428812}
@@ -215,10 +215,11 @@ MonoBehaviour:
   bullet: {fileID: 1517241943244988, guid: a4df25e291d702b40a3e81ecc4590ada, type: 2}
   spawnPosition: {fileID: 4945536396534138}
   angle: 75
-  bulletCount: 12
+  bulletSpray: 5
   shotgunSounds:
   - {fileID: 8300000, guid: 42f26efdbfb001842b567943411476e5, type: 3}
   - {fileID: 8300000, guid: ebeea0f1313503542b07b1cb0008144b, type: 3}
+  cooldown: 2
 --- !u!212 &212592062571509782
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -279,6 +280,6 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.64569116, y: -1.3383181}
-  m_ConnectedAnchor: {x: 0.032845635, y: 0.060840897}
+  m_ConnectedAnchor: {x: -0.3228457, y: 0.060841262}
   m_DampingRatio: 0
   m_Frequency: 0
