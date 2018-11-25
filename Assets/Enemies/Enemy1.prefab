@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  players: []
   sp: {fileID: 212757698073491624}
   imageLeft: {fileID: 21300000, guid: a9884f0023322694fa3164969fca80f7, type: 3}
   imageRight: {fileID: 21300000, guid: d6517f7ed09b0844db0b2d650d8b9a0c, type: 3}
@@ -187,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53bd5477103fe40bf8381055617079bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 30
 --- !u!212 &212283977525459730
 SpriteRenderer:
   m_ObjectHideFlags: 1

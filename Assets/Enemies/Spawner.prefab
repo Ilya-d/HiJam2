@@ -125,7 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1796117209611906, guid: 62ec25b6dfb3d904e800c9459891ee4e, type: 2}
   - {fileID: 1595602821606536, guid: 6f05ecc32fe3d40428e2646adb07ff83, type: 2}
   spawner: {fileID: 1452319539260428}
   enemiesCount: 5
