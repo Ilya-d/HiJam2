@@ -1,6 +1,6 @@
-
 *.sln
 *.csproj
 Library
 obj
 .vs
+Temp
