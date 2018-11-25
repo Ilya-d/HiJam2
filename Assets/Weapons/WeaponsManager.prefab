@@ -63,3 +63,6 @@ MonoBehaviour:
     type: 2}
   playerPrefab: {fileID: 114528522892863300, guid: 90ef3014b563f954e80035f6d74208d2,
     type: 2}
+  playersControlls:
+  - {fileID: 11400000, guid: 193dbc8032ac74cb293173c6eed52b3e, type: 2}
+  - {fileID: 11400000, guid: f8867495966194993b6a2768c53ae04e, type: 2}
