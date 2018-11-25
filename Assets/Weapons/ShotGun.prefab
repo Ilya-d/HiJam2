@@ -118,8 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1517241943244988, guid: a4df25e291d702b40a3e81ecc4590ada, type: 2}
   spawnPosition: {fileID: 4945536396534138}
-  angle: 45
-  bulletCount: 5
+  angle: 75
+  bulletCount: 12
 --- !u!212 &212592062571509782
 SpriteRenderer:
   m_ObjectHideFlags: 1
