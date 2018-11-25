@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResourceManager : Singletone<ResourceManager> {
 
@@ -43,6 +44,12 @@ public class ResourceManager : Singletone<ResourceManager> {
             default:
                 Debug.LogError("ItemType not handled: " + itemType);
                 break;
+        }
+    }
+
+    public void Update() {
+        if(Input.GetKeyDown(KeyCode.F5)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

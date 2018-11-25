@@ -15,4 +15,15 @@ public class BulletMove : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.tag == "Player1") {
+            collision.gameObject.GetComponent<Player>().Hit(10);
+            Destroy(gameObject);
+        }
+        if(collision.gameObject.tag == "Enemy") {
+            collision.gameObject.GetComponent<Unit>().Hit(10);
+            Destroy(gameObject);
+        }
+    }
 }
