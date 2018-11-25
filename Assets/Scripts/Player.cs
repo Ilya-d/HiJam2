@@ -59,14 +59,6 @@ public class Player : Unit {
     private Weapon currentWeapon;
     private ResourceManager.WeaponType currentWeaponType;
 
-    [SerializeField] private KeyCode keyLeft = KeyCode.A;
-    [SerializeField] private KeyCode keyRight = KeyCode.D;
-    [SerializeField] private KeyCode keyUp = KeyCode.W;
-    [SerializeField] private KeyCode keyDown = KeyCode.S;
-    [SerializeField] private KeyCode keyRotateLeft = KeyCode.C;
-    [SerializeField] private KeyCode keyRotateRight = KeyCode.V;
-    [SerializeField] private KeyCode keyUse = KeyCode.B;
-
     [SerializeField] private Sprite imageLeft;
     [SerializeField] private Sprite imageRight;
     [SerializeField] private Sprite imageUp;
@@ -75,6 +67,8 @@ public class Player : Unit {
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator animation;
     [SerializeField] private GameObject pickupNotify;
+
+    private PlayerControlsConfig controlls;
 
     private UsableItem itemOnFloor;
 
@@ -91,6 +85,7 @@ public class Player : Unit {
 
     public void Init(PlayerNumbers number) {
         playerNumber = number;
+        controlls = ResourceManager.instance.playersControlls[(int)playerNumber];
     }
 
     void FixedUpdate() {
@@ -151,11 +146,11 @@ public class Player : Unit {
     }
 
     private void UseButton() {
-        if (itemOnFloor != null && Input.GetKeyDown(keyUse)) {
+        if (itemOnFloor != null && Input.GetKeyDown(controlls.keyUse)) {
             UseItem(itemOnFloor);
             return;
         }
-        if (Input.GetKeyDown(keyUse)) {
+        if (Input.GetKeyDown(controlls.keyUse)) {
             if (currentWeaponType == ResourceManager.WeaponType.Shotgun) {
                 currentWeapon.gameObject.GetComponent<ShotGun>().Shoot();
             }
@@ -183,25 +178,25 @@ public class Player : Unit {
     private void Attack() {
         if (currentWeaponType != ResourceManager.WeaponType.Shotgun) {
             if (hitAvailable) {
-                if (Input.GetKeyDown(keyRotateLeft)) {
+                if (Input.GetKeyDown(controlls.keyRotateLeft)) {
                     if (currentEnergy >= energyHitCost) {
                         handRb.AddTorque(force, ForceMode2D.Impulse);
                         currentEnergy -= energyHitCost;
                     }
                 }
-                else if (Input.GetKeyDown(keyRotateRight)) {
+                else if (Input.GetKeyDown(controlls.keyRotateRight)) {
                     if (currentEnergy >= energyHitCost) {
                         handRb.AddTorque(-force, ForceMode2D.Impulse);
                         currentEnergy -= energyHitCost;
                     }
                 }
 
-                if (Input.GetKey(keyRotateLeft)) {
+                if (Input.GetKey(controlls.keyRotateLeft)) {
                     atacking = true;
                     handRb.AddTorque(force, ForceMode2D.Force);
                     currentEnergy -= Time.deltaTime * energyDecreaseSpeed;
                 }
-                else if (Input.GetKey(keyRotateRight)) {
+                else if (Input.GetKey(controlls.keyRotateRight)) {
                     atacking = true;
                     handRb.AddTorque(-force, ForceMode2D.Force);
                     currentEnergy -= Time.deltaTime * energyDecreaseSpeed;
@@ -212,10 +207,10 @@ public class Player : Unit {
             }
         }
         else {
-            if (Input.GetKey(keyRotateLeft)) {
+            if (Input.GetKey(controlls.keyRotateLeft)) {
                 handRb.AddTorque(force / 5, ForceMode2D.Force);
             }
-            else if (Input.GetKey(keyRotateRight)) {
+            else if (Input.GetKey(controlls.keyRotateRight)) {
                 handRb.AddTorque(-force / 5, ForceMode2D.Force);
             }
         }
@@ -224,11 +219,11 @@ public class Player : Unit {
 
     private void Movement() {
 
-        if (Input.GetKey(keyRight)) {
+        if (Input.GetKey(controlls.keyRight)) {
             currentVelocity.x = currentSpeed;
             playerSprite.sprite = imageRight;
         }
-        else if (Input.GetKey(keyLeft)) {
+        else if (Input.GetKey(controlls.keyLeft)) {
             currentVelocity.x = -currentSpeed;
             playerSprite.sprite = imageLeft;
         }
@@ -236,11 +231,11 @@ public class Player : Unit {
             currentVelocity.x = 0;
         }
 
-        if (Input.GetKey(keyUp)) {
+        if (Input.GetKey(controlls.keyUp)) {
             currentVelocity.y = currentSpeed;
             playerSprite.sprite = imageUp;
         }
-        else if (Input.GetKey(keyDown)) {
+        else if (Input.GetKey(controlls.keyDown)) {
             currentVelocity.y = -currentSpeed;
             playerSprite.sprite = imageDown;
         }

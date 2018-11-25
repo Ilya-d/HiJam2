@@ -15,6 +15,8 @@ public class ResourceManager : Singletone<ResourceManager> {
     [SerializeField] private UsableItem playerPickup;
     [SerializeField] private Player playerPrefab;
 
+    public List<PlayerControlsConfig> playersControlls;
+
 
     public void SpawnPlayer(Player.PlayerNumbers playerNumber, Vector3 position) {
         var player = Instantiate(playerPrefab, position, Quaternion.identity);
