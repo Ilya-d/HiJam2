@@ -22,12 +22,31 @@ public class Player : MonoBehaviour {
 
     private Rigidbody2D rb2;
     [SerializeField] float speed = 10f;
+    private float currentSpeed;
 
     private Vector2 currentVelocity = new Vector2();
     private bool isMoving;
 
-    public int hp = 100;
-    [SerializeField] private Text hp_text;
+    public float maxHealth = 100;
+    private float currentHealth;
+
+    [Header("Настройки энергии")]
+    public float maxEnergy = 100;
+    private float currentEnergy;
+    [SerializeField] private float energyDecreaseSpeed = 10f;
+    [SerializeField] private float energyHitCost = 15f;
+    [SerializeField] private float energyRegen = 10f;
+    [SerializeField] private float multEnergy = 4;
+    [SerializeField] [Range(0, 1)] private float speedDebuf = 0.7f;
+    private bool hitAvailable = true;
+
+    [Header("Настройки UI")]
+    [SerializeField] private Image healthBar;
+    [SerializeField] private Image energyBar;
+    [SerializeField] private Color fullHealth;
+    [SerializeField] private Color halfHealth;
+    [SerializeField] private Color lowHealth;
+
     private Weapon currentWeapon;
     private WeaponsManager.WeaponType currentWeaponType;
 
@@ -54,13 +73,44 @@ public class Player : MonoBehaviour {
     void Start() {
         rb2 = GetComponent<Rigidbody2D>();
         SetWeapon(WeaponsManager.WeaponType.Hammer);
+        currentSpeed = speed;
+        currentHealth = maxHealth;
+        currentEnergy = maxEnergy;
     }
 
     void FixedUpdate() {
         Movement();
         Attack();
+    }
+
+    private void Update() {
+        CalculateUI();
+        CheckEnergy();
         UseButton();
-        UpdateHP();
+        
+    }
+
+    private void CheckEnergy() {
+        if (currentEnergy < maxEnergy) {
+            if (hitAvailable) {
+                currentEnergy += Time.deltaTime * energyRegen;
+            }
+            else {
+                currentEnergy += Time.deltaTime * energyRegen * multEnergy;
+            }
+        }
+        if (currentEnergy <= 0) {
+            hitAvailable = false;
+            currentSpeed = speed * speedDebuf;
+            StartCoroutine(WaitForRest());
+        }
+        maxEnergy = Mathf.Clamp(maxEnergy, 0, 100);
+    }
+
+    IEnumerator WaitForRest() {
+        yield return new WaitForSeconds(2);
+        hitAvailable = true;
+        currentSpeed = speed;
     }
 
     private void SetWeapon(WeaponsManager.WeaponType weapon) {
@@ -71,21 +121,25 @@ public class Player : MonoBehaviour {
         currentWeaponType = weapon;
     }
 
+    private void CalculateUI() {
+        healthBar.fillAmount = currentHealth / maxHealth;
+        energyBar.fillAmount = currentEnergy / maxEnergy;
 
-    public void Hit(float weaponSpeed) {
-        hp -= (int)weaponSpeed;
-
+        if (healthBar.fillAmount < 0.2) healthBar.color = lowHealth;
+        else if (healthBar.fillAmount < 0.6) healthBar.color = halfHealth;
+        else healthBar.color = fullHealth;
     }
 
-    private void UpdateHP() {
-        if (hp_text == null) {
-            return;
+    public void Hit(float weaponSpeed) {
+        if(weaponSpeed > 10) {
+            currentHealth -= 15;
         }
-        if (hp > 0) {
-            hp_text.text = hp.ToString();
-        } else {
-            hp_text.text = "DEAD";
-        }   
+        else if(weaponSpeed > 5) {
+            currentHealth -= 10;
+        }
+        else if(weaponSpeed > 2) {
+            currentHealth -= 5;
+        }
     }
 
     private void UseButton() {
@@ -110,18 +164,27 @@ public class Player : MonoBehaviour {
 
     private void Attack() {
         if (currentWeaponType != WeaponsManager.WeaponType.Shotgun) {
-            if (Input.GetKeyDown(keyRotateLeft)) {
-                handRb.AddTorque(force, ForceMode2D.Impulse);
-            }
-            else if (Input.GetKeyDown(keyRotateRight)) {
-                handRb.AddTorque(-force, ForceMode2D.Impulse);
-            }
-
-            if (Input.GetKey(keyRotateLeft)) {
-                handRb.AddTorque(force, ForceMode2D.Force);
-            }
-            else if (Input.GetKey(keyRotateRight)) {
-                handRb.AddTorque(-force, ForceMode2D.Force);
+            if (hitAvailable) {
+                if (Input.GetKeyDown(keyRotateLeft)) {
+                    if (currentEnergy >= energyHitCost) {
+                        handRb.AddTorque(force, ForceMode2D.Impulse);
+                        currentEnergy -= energyHitCost;
+                    }
+                }
+                else if (Input.GetKeyDown(keyRotateRight)) {
+                    if (currentEnergy >= energyHitCost) {
+                        handRb.AddTorque(-force, ForceMode2D.Impulse);
+                        currentEnergy -= energyHitCost;
+                    }
+                }
+                if (Input.GetKey(keyRotateLeft)) {
+                    handRb.AddTorque(force, ForceMode2D.Force);
+                    currentEnergy -= Time.deltaTime * energyDecreaseSpeed;
+                }
+                else if (Input.GetKey(keyRotateRight)) {
+                    handRb.AddTorque(-force, ForceMode2D.Force);
+                    currentEnergy -= Time.deltaTime * energyDecreaseSpeed;
+                }
             }
         }
         else {
@@ -134,44 +197,45 @@ public class Player : MonoBehaviour {
         }
     }
 
+
     private void Movement() {
 
-        if (Input.GetKey(keyRight)) {
-            currentVelocity.x = speed;
-            playerSprite.sprite = imageRight;
-        }
-        else if (Input.GetKey(keyLeft)) {
-            currentVelocity.x = -speed;
-            playerSprite.sprite = imageLeft;
-        }
-        else {
-            currentVelocity.x = 0;
-        }
-
-        if (Input.GetKey(keyUp)) {
-            currentVelocity.y = speed;
-            playerSprite.sprite = imageUp;
-        }
-        else if (Input.GetKey(keyDown)) {
-            currentVelocity.y = -speed;
-            playerSprite.sprite = imageDown;
-        }
-        else {
-            currentVelocity.y = 0;
-        }
-
-        if (currentVelocity != Vector2.zero) {
-            rb2.velocity = currentVelocity;
-            isMoving = true;
-        }
-        else {
-            if (isMoving) {
-                rb2.velocity = Vector2.zero;
-                isMoving = false;
-            }
-        }
-        animation.enabled = isMoving;
-
-
+    if (Input.GetKey(keyRight)) {
+        currentVelocity.x = currentSpeed;
+        playerSprite.sprite = imageRight;
     }
+    else if (Input.GetKey(keyLeft)) {
+        currentVelocity.x = -currentSpeed;
+        playerSprite.sprite = imageLeft;
+    }
+    else {
+        currentVelocity.x = 0;
+    }
+
+    if (Input.GetKey(keyUp)) {
+        currentVelocity.y = currentSpeed;
+        playerSprite.sprite = imageUp;
+    }
+    else if (Input.GetKey(keyDown)) {
+        currentVelocity.y = -currentSpeed;
+        playerSprite.sprite = imageDown;
+    }
+    else {
+        currentVelocity.y = 0;
+    }
+
+    if (currentVelocity != Vector2.zero) {
+        rb2.velocity = currentVelocity;
+        isMoving = true;
+    }
+    else {
+        if (isMoving) {
+            rb2.velocity = Vector2.zero;
+            isMoving = false;
+        }
+    }
+    animation.enabled = isMoving;
+
+
+}
 }
