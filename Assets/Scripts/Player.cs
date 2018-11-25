@@ -4,18 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
 
-    public enum Players
-    {
+    public enum Players {
         player1 = 0,
         player2 = 1
-    }
-
-    public enum WeaponType {
-        melee = 0,
-        range = 1
     }
 
     [SerializeField] private Rigidbody2D handRb;
@@ -30,12 +23,13 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2;
     [SerializeField] float speed = 10f;
 
-    [SerializeField] Vector2 currentVelocity = new Vector2();
-    [SerializeField] bool isMoving;
+    private Vector2 currentVelocity = new Vector2();
+    private bool isMoving;
 
     public int hp = 100;
     [SerializeField] private Text hp_text;
     private Weapon currentWeapon;
+    private WeaponsManager.WeaponType currentWeaponType;
 
     [SerializeField] private KeyCode keyLeft = KeyCode.A;
     [SerializeField] private KeyCode keyRight = KeyCode.D;
@@ -57,7 +51,7 @@ public class Player : MonoBehaviour
 
     void Start() {
         rb2 = GetComponent<Rigidbody2D>();
-        currentWeapon = WeaponsManager.instance.CreateWeapon(WeaponsManager.WeaponType.Hammer, handContainer);
+        SetWeapon(WeaponsManager.WeaponType.Hammer);
     }
 
     void FixedUpdate() {
@@ -66,12 +60,17 @@ public class Player : MonoBehaviour
         UseButton();
     }
 
-   
+    private void SetWeapon(WeaponsManager.WeaponType weapon) {
+        if (currentWeapon != null) {
+            Destroy(currentWeapon.gameObject);
+        }
+        currentWeapon = WeaponsManager.instance.CreateWeapon(weapon, handContainer);
+        currentWeaponType = weapon;
+    }
 
     private void Update() {
         hp_text.text = hp.ToString();
-        if (hp < 0)
-        {
+        if (hp < 0) {
             hp_text.text = "DEAD";
         }
     }
@@ -101,9 +100,8 @@ public class Player : MonoBehaviour
             else if (Input.GetKey(keyRotateRight)) {
                 handRb.AddTorque(-force, ForceMode2D.Force);
             }
-     //   }
-
-     //   if (currentWeapon == WeaponType.range) {
+        }
+        else {
             if (Input.GetKey(keyRotateLeft)) {
                 handRb.AddTorque(force / 5, ForceMode2D.Force);
             }
@@ -121,27 +119,54 @@ public class Player : MonoBehaviour
         if (Input.GetKey(keyRight)) {
             currentVelocity.x = speed;
             playerSprite.sprite = imageRight;
-        } else if (Input.GetKey(keyLeft)) {
+        }
+        else if (Input.GetKey(keyLeft)) {
             currentVelocity.x = -speed;
             playerSprite.sprite = imageLeft;
-        } else {
+        }
+        else {
             currentVelocity.x = 0;
         }
 
         if (Input.GetKey(keyUp)) {
             currentVelocity.y = speed;
             playerSprite.sprite = imageUp;
-        } else if (Input.GetKey(keyDown)) {
+        }
+        else if (Input.GetKey(keyDown)) {
             currentVelocity.y = -speed;
             playerSprite.sprite = imageDown;
-        } else {
+        }
+        else {
             currentVelocity.y = 0;
         }
+
+        /*if (playerNo == Players.player2) {
+            if (Input.GetKey(KeyCode.RightArrow)) {
+                currentVelocity.x = speed;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow)) {
+                currentVelocity.x = -speed;
+            }
+            else {
+                currentVelocity.x = 0;
+            }
+
+            if (Input.GetKey(KeyCode.UpArrow)) {
+                currentVelocity.y = speed;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow)) {
+                currentVelocity.y = -speed;
+            }
+            else {
+                currentVelocity.y = 0;
+            }
+        }*/
 
         if (currentVelocity != Vector2.zero) {
             rb2.velocity = currentVelocity;
             isMoving = true;
-        } else {
+        }
+        else {
             if (isMoving) {
                 rb2.velocity = Vector2.zero;
                 isMoving = false;
