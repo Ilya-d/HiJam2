@@ -46,8 +46,10 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator animation;
+    [SerializeField] private GameObject pickupNotify;
 
-    private Weapon weaponOnFloor;
+    private UsableItem itemOnFloor;
+
 
     void Start() {
         rb2 = GetComponent<Rigidbody2D>();
@@ -58,6 +60,7 @@ public class Player : MonoBehaviour {
         Movement();
         Attack();
         UseButton();
+        UpdateHP();
     }
 
     private void SetWeapon(WeaponsManager.WeaponType weapon) {
@@ -68,21 +71,41 @@ public class Player : MonoBehaviour {
         currentWeaponType = weapon;
     }
 
-    private void Update() {
-        hp_text.text = hp.ToString();
-        if (hp < 0) {
-            hp_text.text = "DEAD";
-        }
-    }
 
     public void Hit(float weaponSpeed) {
         hp -= (int)weaponSpeed;
+
+    }
+
+    private void UpdateHP() {
+        if (hp_text == null) {
+            return;
+        }
+        if (hp > 0) {
+            hp_text.text = hp.ToString();
+        } else {
+            hp_text.text = "DEAD";
+        }   
     }
 
     private void UseButton() {
-        if (weaponOnFloor != null && Input.GetKeyDown(keyUse)) {
-            
+        if (itemOnFloor != null && Input.GetKeyDown(keyUse)) {
+            UseItem(itemOnFloor);
         }
+        if (Input.GetKeyDown(keyUse)) {
+            if (currentWeaponType == WeaponsManager.WeaponType.Shotgun) {
+                currentWeapon.gameObject.GetComponent<ShotGun>().Shoot();
+            }
+        }
+    }
+
+    private void UseItem(UsableItem item) {
+        if (item.itemType == UsableItem.ItemType.Weapon) {
+            SetWeapon((WeaponsManager.WeaponType)itemOnFloor.value);
+            Destroy(itemOnFloor);    
+        }
+
+        itemOnFloor = null;
     }
 
     private void Attack() {
@@ -137,28 +160,6 @@ public class Player : MonoBehaviour {
             currentVelocity.y = 0;
         }
 
-        /*if (playerNo == Players.player2) {
-            if (Input.GetKey(KeyCode.RightArrow)) {
-                currentVelocity.x = speed;
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow)) {
-                currentVelocity.x = -speed;
-            }
-            else {
-                currentVelocity.x = 0;
-            }
-
-            if (Input.GetKey(KeyCode.UpArrow)) {
-                currentVelocity.y = speed;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow)) {
-                currentVelocity.y = -speed;
-            }
-            else {
-                currentVelocity.y = 0;
-            }
-        }*/
-
         if (currentVelocity != Vector2.zero) {
             rb2.velocity = currentVelocity;
             isMoving = true;
@@ -170,6 +171,7 @@ public class Player : MonoBehaviour {
             }
         }
         animation.enabled = isMoving;
+
 
     }
 }

@@ -88,9 +88,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4258913764025952}
   - component: {fileID: 50409859471983178}
-  - component: {fileID: 58913145313246122}
   - component: {fileID: 114528522892863300}
   - component: {fileID: 82069422979020172}
+  - component: {fileID: 70139745554401398}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -179,13 +179,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937683915712772}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4880509710078504}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &4258913764025952
 Transform:
   m_ObjectHideFlags: 1
@@ -193,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393043914300716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.19, y: -0.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4496231462042574}
@@ -295,8 +295,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58913145313246122
-CircleCollider2D:
+--- !u!70 &70139745554401398
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -308,8 +308,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.2, y: 1.7}
+  m_Direction: 0
 --- !u!82 &82069422979020172
 AudioSource:
   m_ObjectHideFlags: 1
@@ -451,8 +451,6 @@ MonoBehaviour:
   impulse: 0
   playerNo: 0
   speed: 10
-  currentVelocity: {x: 0, y: 0}
-  isMoving: 0
   hp: 100
   hp_text: {fileID: 0}
   keyLeft: 97
@@ -468,6 +466,7 @@ MonoBehaviour:
   imageDown: {fileID: 21300000, guid: 05d46270f3d069148ab89c39cac1b776, type: 3}
   playerSprite: {fileID: 212539298583250558}
   animation: {fileID: 95155084317048856}
+  pickupNotify: {fileID: 0}
 --- !u!212 &212350519076262996
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -603,7 +602,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212475625584884250
@@ -758,7 +757,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.7}
-  m_ConnectedAnchor: {x: 0, y: 0.00000020675361}
+  m_ConnectedAnchor: {x: 0.00000011920929, y: 0.00000017881393}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
