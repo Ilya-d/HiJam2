@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1097419787994830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19337982, y: -1.0350499, z: -0.046386722}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,3 +54,8 @@ MonoBehaviour:
   weaponsList:
   - {fileID: 114198692241665482, guid: 255fcfe89d1e8441c8e8d1dfa47adf42, type: 2}
   - {fileID: 114013452552370196, guid: a70fc1717cb9f463399d1bab41dfe3f8, type: 2}
+  - {fileID: 114174508312864252, guid: 03540045dd82be749b76ea944fcb0e17, type: 2}
+  weaponsPickups:
+  - {fileID: 114777679267798768, guid: 6224b46486b974b5e96d4da047047d0c, type: 2}
+  - {fileID: 114777679267798768, guid: 169e58bca756643099fd562783882cd6, type: 2}
+  - {fileID: 114777679267798768, guid: 80449b7b33a5241f48ea266035fa79f4, type: 2}

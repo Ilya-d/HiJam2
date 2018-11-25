@@ -76,6 +76,7 @@ public class Player : MonoBehaviour {
         currentSpeed = speed;
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
+        UpdatePickupUi();
     }
 
     void FixedUpdate() {
@@ -145,6 +146,7 @@ public class Player : MonoBehaviour {
     private void UseButton() {
         if (itemOnFloor != null && Input.GetKeyDown(keyUse)) {
             UseItem(itemOnFloor);
+            return;
         }
         if (Input.GetKeyDown(keyUse)) {
             if (currentWeaponType == WeaponsManager.WeaponType.Shotgun) {
@@ -155,8 +157,9 @@ public class Player : MonoBehaviour {
 
     private void UseItem(UsableItem item) {
         if (item.itemType == UsableItem.ItemType.Weapon) {
+            WeaponsManager.instance.CreatePickup(UsableItem.ItemType.Weapon, (int)currentWeapon.weaponType, transform.position);
             SetWeapon((WeaponsManager.WeaponType)itemOnFloor.value);
-            Destroy(itemOnFloor);    
+            Destroy(itemOnFloor.gameObject);
         }
 
         itemOnFloor = null;
@@ -200,42 +203,64 @@ public class Player : MonoBehaviour {
 
     private void Movement() {
 
-    if (Input.GetKey(keyRight)) {
-        currentVelocity.x = currentSpeed;
-        playerSprite.sprite = imageRight;
-    }
-    else if (Input.GetKey(keyLeft)) {
-        currentVelocity.x = -currentSpeed;
-        playerSprite.sprite = imageLeft;
-    }
-    else {
-        currentVelocity.x = 0;
-    }
-
-    if (Input.GetKey(keyUp)) {
-        currentVelocity.y = currentSpeed;
-        playerSprite.sprite = imageUp;
-    }
-    else if (Input.GetKey(keyDown)) {
-        currentVelocity.y = -currentSpeed;
-        playerSprite.sprite = imageDown;
-    }
-    else {
-        currentVelocity.y = 0;
-    }
-
-    if (currentVelocity != Vector2.zero) {
-        rb2.velocity = currentVelocity;
-        isMoving = true;
-    }
-    else {
-        if (isMoving) {
-            rb2.velocity = Vector2.zero;
-            isMoving = false;
+        if (Input.GetKey(keyRight)) {
+            currentVelocity.x = currentSpeed;
+            playerSprite.sprite = imageRight;
         }
+        else if (Input.GetKey(keyLeft)) {
+            currentVelocity.x = -currentSpeed;
+            playerSprite.sprite = imageLeft;
+        }
+        else {
+            currentVelocity.x = 0;
+        }
+
+        if (Input.GetKey(keyUp)) {
+            currentVelocity.y = currentSpeed;
+            playerSprite.sprite = imageUp;
+        }
+        else if (Input.GetKey(keyDown)) {
+            currentVelocity.y = -currentSpeed;
+            playerSprite.sprite = imageDown;
+        }
+        else {
+            currentVelocity.y = 0;
+        }
+
+        if (currentVelocity != Vector2.zero) {
+            rb2.velocity = currentVelocity;
+            isMoving = true;
+        }
+        else {
+            if (isMoving) {
+                rb2.velocity = Vector2.zero;
+                isMoving = false;
+            }
+        }
+        animation.enabled = isMoving;
     }
-    animation.enabled = isMoving;
 
+	private void OnTriggerEnter2D(Collider2D col) {
+        var item = col.GetComponent<UsableItem>();
+        if (item == null) {
+            return;
+        }
+        itemOnFloor = item;
+        UpdatePickupUi();
+	}
 
-}
+    private void OnTriggerExit2D(Collider2D col) {
+        var item = col.GetComponent<UsableItem>();
+        if (item == null) {
+            return;
+        }
+        if (item == itemOnFloor) {
+            itemOnFloor = null;
+        }
+        UpdatePickupUi();
+    }
+
+    private void UpdatePickupUi() {
+        pickupNotify.SetActive(itemOnFloor != null);
+    }
 }
