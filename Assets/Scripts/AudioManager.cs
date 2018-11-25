@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour {
         Play("GameplayTheme");
         Play("ForestAmb");
         Play("RoundStart");
+        Play("Crows");
 
     }
 
