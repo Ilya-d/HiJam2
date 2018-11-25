@@ -10,12 +10,7 @@ public class ShotGun : MonoBehaviour {
     [Header("Настройки дробовика")]
     [SerializeField] private float angle = 45;
     [SerializeField] private int bulletCount = 5;
-    private SpriteRenderer spriteRenderer;
-
-    void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-	}
-
+   
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.B)) {
             Shoot();
