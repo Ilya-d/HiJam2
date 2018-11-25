@@ -4,16 +4,33 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-    private GameObject player;
+    private Vector3 target;
     public float speed;
-	// Use this for initialization
-	void Start () {
-        player = GameObject.FindWithTag("Player1");
-	}
+
+    public Player[] players;
 	
-	// Update is called once per frame
 	void Update () {
+        target = FindNearestTarget();
+        if (target == null) {
+            return;
+        }
+
         float move = speed * Time.deltaTime;
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.transform.position, move);
+        gameObject.transform.position = Vector3.MoveTowards(transform.position, target, move);
+    }
+
+    private Vector3 FindNearestTarget() {
+        Vector3 nearestTarget = Vector3.zero;
+        float closestDistanceSqr = Mathf.Infinity;
+
+        for(int i = 0;i<players.Length;i++) {
+            Vector3 directionToTarget = players[i].PlayerPosition - transform.position;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr) {
+                closestDistanceSqr = dSqrToTarget;
+                nearestTarget = players[i].PlayerPosition;
+            }
+        }
+        return nearestTarget;
     }
 }

@@ -31,6 +31,14 @@ public class Player : MonoBehaviour {
     public float maxHealth = 100;
     private float currentHealth;
 
+    public Vector3 PlayerPosition {
+        get { return transform.position; }
+    }
+
+    public bool isAlive {
+        get { return (currentHealth > 0); }
+    }
+
     [Header("Настройки энергии")]
     public float maxEnergy = 100;
     private float currentEnergy;
@@ -39,7 +47,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private float energyRegen = 10f;
     [SerializeField] private float multEnergy = 4;
     [SerializeField] [Range(0, 1)] private float speedDebuf = 0.7f;
+
     private bool hitAvailable = true;
+    private bool atacking = false;
 
     [Header("Настройки UI")]
     [SerializeField] private Image healthBar;
@@ -94,13 +104,19 @@ public class Player : MonoBehaviour {
 
     private void CheckEnergy() {
         if (currentEnergy < maxEnergy) {
-            if (hitAvailable) {
-                currentEnergy += Time.deltaTime * energyRegen;
+            if (hitAvailable && !atacking) {
+                if (isMoving) {
+                    currentEnergy += Time.deltaTime * energyRegen;
+                }
+                else {
+                    currentEnergy += Time.deltaTime * energyRegen * 2;
+                }
             }
-            else {
+            else if (!hitAvailable) {
                 currentEnergy += Time.deltaTime * energyRegen * multEnergy;
             }
         }
+
         if (currentEnergy <= 0) {
             hitAvailable = false;
             currentSpeed = speed * speedDebuf;
@@ -179,13 +195,19 @@ public class Player : MonoBehaviour {
                         currentEnergy -= energyHitCost;
                     }
                 }
+
                 if (Input.GetKey(keyRotateLeft)) {
+                    atacking = true;
                     handRb.AddTorque(force, ForceMode2D.Force);
                     currentEnergy -= Time.deltaTime * energyDecreaseSpeed;
                 }
                 else if (Input.GetKey(keyRotateRight)) {
+                    atacking = true;
                     handRb.AddTorque(-force, ForceMode2D.Force);
                     currentEnergy -= Time.deltaTime * energyDecreaseSpeed;
+                }
+                else {
+                    atacking = false;
                 }
             }
         }
