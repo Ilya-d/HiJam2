@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,9 +53,6 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator animation;
 
-    private bool inItemSpawner;
-    private GetItemScript itemSpawner;
-
     void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
@@ -68,6 +66,8 @@ public class Player : MonoBehaviour
         UseButton();
     }
 
+   
+
     private void Update()
     {
         hp_text.text = hp.ToString();
@@ -80,6 +80,10 @@ public class Player : MonoBehaviour
     public void Hit(float weaponSpeed)
     {
         hp -= (int)weaponSpeed;
+    }
+
+    private void UseButton() {
+
     }
 
     private void Attack()
@@ -181,32 +185,5 @@ public class Player : MonoBehaviour
         }
         animation.enabled = isMoving;
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.tag == "Item") {
-            inItemSpawner = true;
-            itemSpawner = collision.gameObject.GetComponent<GetItemScript>();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Item") {
-            inItemSpawner = false;
-            itemSpawner = null;
-        }
-    }
-
-    private void UseButton() {
-        if (Input.GetKeyDown(keyUse)) {
-            if (inItemSpawner) {
-                if (itemSpawner.ItemAvailable()) {
-                    itemSpawner.GetItem();
-                }
-            }
-            else {
-                
-            }
-        }
     }
 }
