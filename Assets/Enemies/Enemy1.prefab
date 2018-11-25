@@ -274,6 +274,8 @@ MonoBehaviour:
   imageRight: {fileID: 21300000, guid: d6517f7ed09b0844db0b2d650d8b9a0c, type: 3}
   imageUp: {fileID: 21300000, guid: 89b5b68835ee6be43a1e70b190d7216a, type: 3}
   imageDown: {fileID: 21300000, guid: 25656d84251945e4bb011eb971d5c70d, type: 3}
+  animator: {fileID: 95298416885147010}
+  source: {fileID: 82973922558894388}
   damage: 8
   attackCooldown: 0.5
 --- !u!114 &114633262702121306

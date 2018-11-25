@@ -10,7 +10,6 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private List<Player> players = new List<Player>();
     public AudioClip[] walkSounds;
-    private AudioSource source;
 
     private bool isMoving;
     private bool isAttacking = false;
@@ -21,7 +20,9 @@ public class EnemyBehaviour : MonoBehaviour {
     [SerializeField] private Sprite imageUp;
     [SerializeField] private Sprite imageDown;
 
-    private Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource source;
+
 
     [SerializeField] float damage = 10f;
 
@@ -30,8 +31,6 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void Start() {
         players.AddRange(FindObjectsOfType<Player>());
-        animator = GetComponent<Animator>();
-        source = GetComponent<AudioSource>();
 
         EventsManager.Subscribe(EventsManager.EventType.PlayerSpawn, OnPlayerSpawn);
         EventsManager.Subscribe(EventsManager.EventType.PlayerSpawn, OnPlayerDeath);
@@ -121,6 +120,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
     }
 
+    void OnDeath() {
+        
+    }
 
     public void OnWalkSound()
     {
