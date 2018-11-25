@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour {
         if (currentHealth <= 0) {
             Destroy(gameObject);
         }
-        Debug.Log("currentHealth=" + currentHealth);
+     //   Debug.Log("currentHealth=" + currentHealth);
     }
 
 	// Use this for initialization

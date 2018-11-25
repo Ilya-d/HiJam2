@@ -29,8 +29,8 @@ public class Player : Unit {
     private bool isMoving;
 
 
-    public Vector3 PlayerPosition {
-        get { return transform.position; }
+    public Transform PlayerTransform {
+        get { return transform; }
     }
 
 
