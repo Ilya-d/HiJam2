@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gamecontroller : MonoBehaviour {
+public class Spawner : MonoBehaviour {
 
     
     public GameObject[] enemies;
@@ -23,32 +23,21 @@ public class Gamecontroller : MonoBehaviour {
         restart = false;
         StartCoroutine(SpawnWaves());
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-
-		
-	}
-
-    IEnumerator SpawnWaves()
-    {
+    IEnumerator SpawnWaves() {
         yield return new WaitForSeconds(startWait);
 
-        while (true)
-        {
+        while (true) {
 
-            for (int i = 0; i < enemiesCount; i++)
-            {
+            for (int i = 0; i < enemiesCount; i++) {
                 GameObject enemy = enemies[Random.Range(0, enemies.Length)];
                 Instantiate(enemy, spawner.transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(spawnWait);
             }
 
             yield return new WaitForSeconds(waveWait);
-            if (gameOver)
-            {
-               // restartText.text = "Press Spacebar to Restart";
+            if (gameOver) {
+                // restartText.text = "Press Spacebar to Restart";
                 restart = true;
                 break;
             }

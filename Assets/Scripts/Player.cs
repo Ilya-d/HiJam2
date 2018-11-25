@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public class Player : Unit {
 
     public enum Players {
         player1 = 0,
@@ -28,16 +28,11 @@ public class Player : MonoBehaviour {
     private Vector2 currentVelocity = new Vector2();
     private bool isMoving;
 
-    public float maxHealth = 100;
-    private float currentHealth;
 
     public Vector3 PlayerPosition {
         get { return transform.position; }
     }
 
-    public bool isAlive {
-        get { return (currentHealth > 0); }
-    }
 
     [Header("Настройки энергии")]
     public float maxEnergy = 100;
@@ -100,7 +95,6 @@ public class Player : MonoBehaviour {
         CalculateUI();
         CheckEnergy();
         UseButton();
-        
     }
 
     private void CheckEnergy() {
@@ -147,18 +141,6 @@ public class Player : MonoBehaviour {
         if (healthBar.fillAmount < 0.2) healthBar.color = lowHealth;
         else if (healthBar.fillAmount < 0.6) healthBar.color = halfHealth;
         else healthBar.color = fullHealth;
-    }
-
-    public void Hit(float weaponSpeed) {
-        if(weaponSpeed > 10) {
-            currentHealth -= 15;
-        }
-        else if(weaponSpeed > 5) {
-            currentHealth -= 10;
-        }
-        else if(weaponSpeed > 2) {
-            currentHealth -= 5;
-        }
     }
 
     private void UseButton() {
