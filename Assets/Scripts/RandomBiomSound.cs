@@ -18,7 +18,7 @@ public class RandomBiomSound : MonoBehaviour {
 
     void CallAudio()
     {
-        Invoke("RandomSoundness", 10);
+        Invoke("RandomSoundness", 25);
     }
 
     void RandomSoundness()
