@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponsManager : Singletone<WeaponsManager> {
+public class ResourceManager : Singletone<ResourceManager> {
 
     public enum WeaponType {
         Hammer,
@@ -12,6 +12,13 @@ public class WeaponsManager : Singletone<WeaponsManager> {
 
     [SerializeField] private Weapon[] weaponsList;
     [SerializeField] private UsableItem[] weaponsPickups;
+    [SerializeField] private Player playerPrefab;
+
+
+    public void SpawnPlayer(Player.PlayerNumbers playerNumber, Vector3 position) {
+        var player = Instantiate(playerPrefab, position, Quaternion.identity);
+        player.Init(playerNumber);
+    }
 
     public Weapon CreateWeapon(WeaponType wich, Transform parent) {
         return Instantiate(weaponsList[(int)wich], parent);
@@ -22,10 +29,10 @@ public class WeaponsManager : Singletone<WeaponsManager> {
             case UsableItem.ItemType.Weapon:
                 Instantiate(weaponsPickups[value], position, Quaternion.identity);
                 break;
-            case UsableItem.ItemType.Health:
+            /*case UsableItem.ItemType.Health:
                 break;
             case UsableItem.ItemType.Stamina:
-                break;
+                break;*/
             default:
                 Debug.LogError("ItemType not handled: " + itemType);
                 break;

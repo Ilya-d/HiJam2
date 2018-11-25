@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-    private Transform target;
+    private Transform currentTarget;
     private Player currentPlayer;
     public float speed;
 
-    private Player[] players;
+    private List<Player> players = new List<Player>();
 
     private bool isMoving;
     private bool isAttacking;
@@ -27,22 +27,36 @@ public class EnemyBehaviour : MonoBehaviour {
     float distanceToTarget;
 
     private void Start() {
-        players = new Player[2];
+        players.AddRange(FindObjectsOfType<Player>());
         animator = GetComponent<Animator>();
-        //Так совсем не надо делать
-        players[0] = GameObject.FindGameObjectWithTag("Player1").GetComponent<Player>();
-        players[1] = GameObject.FindGameObjectWithTag("Player2").GetComponent<Player>();
+        EventsManager.Subscribe(EventsManager.EventType.PlayerSpawn, OnPlayerSpawn);
+        EventsManager.Subscribe(EventsManager.EventType.PlayerSpawn, OnPlayerDeath);
+    }
+
+	private void OnDestroy() {
+        EventsManager.Unsubscribe(EventsManager.EventType.PlayerSpawn, OnPlayerSpawn);
+        EventsManager.Unsubscribe(EventsManager.EventType.PlayerSpawn, OnPlayerDeath);
+	}
+
+	private void OnPlayerSpawn(object o) {
+        var player = (Player)o;
+        players.Add(player);
+    }
+
+    private void OnPlayerDeath(object o) {
+        var player = (Player)o;
+        players.Remove(player);
     }
 
     void Update () {
-        target = FindNearestTarget();
-        if (target == null) {
+        currentTarget = FindNearestTarget();
+        if (currentTarget == null) {
             return;
         }
 
-        distanceToTarget = Vector2.Distance(transform.position, target.position);
+        distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
         if (distanceToTarget > 1.2f) {
-            Move(target);
+            Move(currentTarget);
         }
         else {
             Hit();
@@ -76,7 +90,7 @@ public class EnemyBehaviour : MonoBehaviour {
         Transform nearestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
 
-        for(int i = 0;i<players.Length;i++) {
+        for(int i = 0;i<players.Count;i++) {
             if(players[i] == null) {
                 continue;
             }

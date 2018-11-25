@@ -5,6 +5,7 @@ public class UsableItem : MonoBehaviour {
 
     public enum ItemType {
         Weapon,
+        Player,
         Health,
         Stamina
     }

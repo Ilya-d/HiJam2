@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
 
-    public WeaponsManager.WeaponType weaponType;
+    public ResourceManager.WeaponType weaponType;
     private Joint2D joint;
 
 	// Use this for initialization

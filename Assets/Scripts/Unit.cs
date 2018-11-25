@@ -21,20 +21,14 @@ public class Unit : MonoBehaviour {
             currentHealth -= 5;
         }
         if (currentHealth <= 0) {
+            SendMessage("OnDeath");
             Destroy(gameObject);
         }
      //   Debug.Log("currentHealth=" + currentHealth);
     }
 
-	// Use this for initialization
     void Start() {
         currentHealth = maxHealth;
-
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-			
-	}
 }

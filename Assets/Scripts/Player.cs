@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Player : Unit {
 
-    public enum Players {
+    public enum PlayerNumbers {
         player1 = 0,
         player2 = 1
     }
@@ -19,7 +19,10 @@ public class Player : Unit {
 
     [SerializeField] public bool impulse;
 
-    [SerializeField] Players playerNo;
+    public PlayerNumbers playerNumber {
+        get;
+        private set;
+    }
 
     private Rigidbody2D rb2;
     [SerializeField] float speed = 10f;
@@ -54,7 +57,7 @@ public class Player : Unit {
     [SerializeField] private Color lowHealth;
 
     private Weapon currentWeapon;
-    private WeaponsManager.WeaponType currentWeaponType;
+    private ResourceManager.WeaponType currentWeaponType;
 
     [SerializeField] private KeyCode keyLeft = KeyCode.A;
     [SerializeField] private KeyCode keyRight = KeyCode.D;
@@ -78,12 +81,16 @@ public class Player : Unit {
 
     void Start() {
         rb2 = GetComponent<Rigidbody2D>();
-        SetWeapon(WeaponsManager.WeaponType.Hammer);
+        SetWeapon(ResourceManager.WeaponType.Hammer);
         currentSpeed = speed;
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
         UpdatePickupUi();
+        EventsManager.SendEvent(EventsManager.EventType.PlayerSpawn, this);
+    }
 
+    public void Init(PlayerNumbers number) {
+        playerNumber = number;
     }
 
     void FixedUpdate() {
@@ -126,21 +133,21 @@ public class Player : Unit {
         currentSpeed = speed;
     }
 
-    private void SetWeapon(WeaponsManager.WeaponType weapon) {
+    private void SetWeapon(ResourceManager.WeaponType weapon) {
         if (currentWeapon != null) {
             Destroy(currentWeapon.gameObject);
         }
-        currentWeapon = WeaponsManager.instance.CreateWeapon(weapon, handContainer);
+        currentWeapon = ResourceManager.instance.CreateWeapon(weapon, handContainer);
         currentWeaponType = weapon;
     }
 
     private void CalculateUI() {
-        healthBar.fillAmount = currentHealth / maxHealth;
+        /*healthBar.fillAmount = currentHealth / maxHealth;
         energyBar.fillAmount = currentEnergy / maxEnergy;
 
         if (healthBar.fillAmount < 0.2) healthBar.color = lowHealth;
         else if (healthBar.fillAmount < 0.6) healthBar.color = halfHealth;
-        else healthBar.color = fullHealth;
+        else healthBar.color = fullHealth;*/
     }
 
     private void UseButton() {
@@ -149,24 +156,32 @@ public class Player : Unit {
             return;
         }
         if (Input.GetKeyDown(keyUse)) {
-            if (currentWeaponType == WeaponsManager.WeaponType.Shotgun) {
+            if (currentWeaponType == ResourceManager.WeaponType.Shotgun) {
                 currentWeapon.gameObject.GetComponent<ShotGun>().Shoot();
             }
         }
     }
 
     private void UseItem(UsableItem item) {
-        if (item.itemType == UsableItem.ItemType.Weapon) {
-            WeaponsManager.instance.CreatePickup(UsableItem.ItemType.Weapon, (int)currentWeapon.weaponType, transform.position);
-            SetWeapon((WeaponsManager.WeaponType)itemOnFloor.value);
-            Destroy(itemOnFloor.gameObject);
+        switch (item.itemType) {
+            case UsableItem.ItemType.Weapon:
+                ResourceManager.instance.CreatePickup(UsableItem.ItemType.Weapon, (int)currentWeapon.weaponType, transform.position);
+                SetWeapon((ResourceManager.WeaponType)itemOnFloor.value);
+                Destroy(itemOnFloor.gameObject);
+                break;
+            case UsableItem.ItemType.Player:
+                ResourceManager.instance.SpawnPlayer((PlayerNumbers)item.value, transform.position);
+                break;
+            default:
+                Debug.LogError("Unhandled item use: " + item.itemType);
+                break;
         }
 
         itemOnFloor = null;
     }
 
     private void Attack() {
-        if (currentWeaponType != WeaponsManager.WeaponType.Shotgun) {
+        if (currentWeaponType != ResourceManager.WeaponType.Shotgun) {
             if (hitAvailable) {
                 if (Input.GetKeyDown(keyRotateLeft)) {
                     if (currentEnergy >= energyHitCost) {
@@ -245,6 +260,12 @@ public class Player : Unit {
         }
         animation.enabled = isMoving;
 
+    }
+
+    // Вызывается из Unit через SendMessage
+    void OnDeath() {
+        ResourceManager.instance.CreatePickup(UsableItem.ItemType.Player, (int)playerNumber, transform.position);
+        EventsManager.SendEvent(EventsManager.EventType.PlayerDeath, this);
     }
 
 	private void OnTriggerEnter2D(Collider2D col) {
