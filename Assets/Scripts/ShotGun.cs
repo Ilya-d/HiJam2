@@ -11,8 +11,16 @@ public class ShotGun : MonoBehaviour {
     [SerializeField] private float angle = 45;
     [SerializeField] private int bulletCount = 5;
 
+    public AudioClip[] shotgunSounds;
+    private AudioSource source;
+
     bool left;
     bool right;
+
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
 
     public void Shoot() {
         Vector3 startingRotation = transform.rotation.eulerAngles;
@@ -21,7 +29,9 @@ public class ShotGun : MonoBehaviour {
             Instantiate(bullet, spawnPosition.position, Quaternion.Euler(startingRotation));
             startingRotation.z += angle / bulletCount;
         }
-    }
+        source.clip = shotgunSounds[Random.Range(0, shotgunSounds.Length)];
+        source.Play();
+     }
 
     private void Update() {
         if (transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 360) {
