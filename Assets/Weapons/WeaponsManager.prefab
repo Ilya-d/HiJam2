@@ -59,5 +59,7 @@ MonoBehaviour:
   - {fileID: 114777679267798768, guid: 6224b46486b974b5e96d4da047047d0c, type: 2}
   - {fileID: 114777679267798768, guid: 169e58bca756643099fd562783882cd6, type: 2}
   - {fileID: 114777679267798768, guid: 80449b7b33a5241f48ea266035fa79f4, type: 2}
+  playerPickup: {fileID: 114777679267798768, guid: 999e93a91ccce471f89166cf39aa8f8f,
+    type: 2}
   playerPrefab: {fileID: 114528522892863300, guid: 90ef3014b563f954e80035f6d74208d2,
     type: 2}

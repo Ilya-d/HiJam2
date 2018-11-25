@@ -10,6 +10,10 @@ public class Unit : MonoBehaviour {
         get { return (currentHealth > 0); }
     }
 
+    public float CurrentHealth{
+        get { return currentHealth; }
+    }
+
     public void Hit(float weaponSpeed) {
         if(weaponSpeed > 10) {
             currentHealth -= 15;
