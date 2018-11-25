@@ -53,14 +53,14 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator animation;
 
-    void Start()
-    {
+    private Weapon weaponOnFloor;
+
+    void Start() {
         rb2 = GetComponent<Rigidbody2D>();
         currentWeapon = WeaponsManager.instance.CreateWeapon(WeaponsManager.WeaponType.Hammer, handContainer);
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         Movement();
         Attack();
         UseButton();
@@ -68,8 +68,7 @@ public class Player : MonoBehaviour
 
    
 
-    private void Update()
-    {
+    private void Update() {
         hp_text.text = hp.ToString();
         if (hp < 0)
         {
@@ -77,17 +76,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Hit(float weaponSpeed)
-    {
+    public void Hit(float weaponSpeed) {
         hp -= (int)weaponSpeed;
     }
 
     private void UseButton() {
-
+        if (weaponOnFloor != null && Input.GetKeyDown(keyUse)) {
+            
+        }
     }
 
-    private void Attack()
-    {
+    private void Attack() {
        // if (currentWeapon == WeaponType.melee) {
             if (Input.GetKeyDown(keyRotateLeft)) {
                 handRb.AddTorque(force, ForceMode2D.Impulse);
@@ -112,73 +111,38 @@ public class Player : MonoBehaviour
                 handRb.AddTorque(-force / 5, ForceMode2D.Force);
             }
      //   }
+
+
        
     }
 
-    private void Movement()
-    {
+    private void Movement() {
 
-        if (Input.GetKey(keyRight))
-        {
+        if (Input.GetKey(keyRight)) {
             currentVelocity.x = speed;
             playerSprite.sprite = imageRight;
-        }
-        else if (Input.GetKey(keyLeft))
-        {
+        } else if (Input.GetKey(keyLeft)) {
             currentVelocity.x = -speed;
             playerSprite.sprite = imageLeft;
-        }
-        else
-        {
+        } else {
             currentVelocity.x = 0;
         }
 
-        if (Input.GetKey(keyUp))
-        {
+        if (Input.GetKey(keyUp)) {
             currentVelocity.y = speed;
             playerSprite.sprite = imageUp;
-        }
-        else if (Input.GetKey(keyDown))
-        {
+        } else if (Input.GetKey(keyDown)) {
             currentVelocity.y = -speed;
             playerSprite.sprite = imageDown;
-        }
-        else
-        {
+        } else {
             currentVelocity.y = 0;
         }
 
-        /*if (playerNo == Players.player2) {
-            if (Input.GetKey(KeyCode.RightArrow)) {
-                currentVelocity.x = speed;
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow)) {
-                currentVelocity.x = -speed;
-            }
-            else {
-                currentVelocity.x = 0;
-            }
-
-            if (Input.GetKey(KeyCode.UpArrow)) {
-                currentVelocity.y = speed;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow)) {
-                currentVelocity.y = -speed;
-            }
-            else {
-                currentVelocity.y = 0;
-            }
-        }*/
-
-        if (currentVelocity != Vector2.zero)
-        {
+        if (currentVelocity != Vector2.zero) {
             rb2.velocity = currentVelocity;
             isMoving = true;
-        }
-        else
-        {
-            if (isMoving)
-            {
+        } else {
+            if (isMoving) {
                 rb2.velocity = Vector2.zero;
                 isMoving = false;
             }
