@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-    public GameObject player;
+    private GameObject player;
     public float speed;
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player1");
 	}
 	
 	// Update is called once per frame
