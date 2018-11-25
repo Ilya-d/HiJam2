@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba85909af3468d4cb40a572344a9f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1014,16 +1014,6 @@ Prefab:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
-    - target: {fileID: 233840123954613352, guid: 90ef3014b563f954e80035f6d74208d2,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
-        type: 2}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f2ef2e0c67a816c449d64cd5ec4e3479, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ef3014b563f954e80035f6d74208d2, type: 2}
   m_IsPrefabAsset: 0
@@ -1227,8 +1217,7 @@ Prefab:
       propertyPath: m_TagString
       value: Player2
       objectReference: {fileID: 0}
-    - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -1247,12 +1236,12 @@ Prefab:
       propertyPath: energyBar
       value: 
       objectReference: {fileID: 47598832}
-    - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 76aea85a8954fb14698eca3537862c19, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 90ef3014b563f954e80035f6d74208d2, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1342989129

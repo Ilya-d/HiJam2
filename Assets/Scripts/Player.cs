@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private Rigidbody2D handRb;
     [SerializeField] private Transform handContainer;
-    [SerializeField] private AudioSource stepsSound;
+
 
     [SerializeField] private float force = 50;
 
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour {
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
         UpdatePickupUi();
-        stepsSound = GetComponent<AudioSource>();
+
     }
 
     void FixedUpdate() {
@@ -262,7 +262,7 @@ public class Player : MonoBehaviour {
             }
         }
         animation.enabled = isMoving;
-        stepsSound.enabled = isMoving;
+
     }
 
 	private void OnTriggerEnter2D(Collider2D col) {

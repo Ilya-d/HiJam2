@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 4258913764025952}
   - component: {fileID: 50409859471983178}
   - component: {fileID: 114528522892863300}
-  - component: {fileID: 82069422979020172}
   - component: {fileID: 70139745554401398}
   m_Layer: 0
   m_Name: Player
@@ -108,6 +107,8 @@ GameObject:
   - component: {fileID: 4496231462042574}
   - component: {fileID: 212539298583250558}
   - component: {fileID: 95155084317048856}
+  - component: {fileID: 82387302518144576}
+  - component: {fileID: 114829264294097518}
   m_Layer: 0
   m_Name: PlayerImage
   m_TagString: Untagged
@@ -210,7 +211,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393043914300716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4496231462042574}
@@ -376,20 +377,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.2, y: 1.7}
   m_Direction: 0
---- !u!82 &82069422979020172
+--- !u!82 &82387302518144576
 AudioSource:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1393043914300716}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1575495209733546}
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f2ef2e0c67a816c449d64cd5ec4e3479, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.129
+  m_Volume: 0.1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -565,6 +566,27 @@ MonoBehaviour:
   playerSprite: {fileID: 212539298583250558}
   animation: {fileID: 95155084317048856}
   pickupNotify: {fileID: 1754250257649424}
+--- !u!114 &114829264294097518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575495209733546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef960a9ba7f56e428d64d64e2f1ba1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: 23d278760a34ffe4b8822114bea3dab6, type: 3}
+  - {fileID: 8300000, guid: d15cea45016dfbd49b0ff81e1cd3c98a, type: 3}
+  - {fileID: 8300000, guid: 03015ad3d8851a34db402a7728579620, type: 3}
+  - {fileID: 8300000, guid: 08c7dd92ff5f3c64ba7e3101facd29ef, type: 3}
+  - {fileID: 8300000, guid: be688afb54f51e342b5f4d071b3e25e1, type: 3}
+  - {fileID: 8300000, guid: 02c9b2f4c20a28e4296b80a67187dfb4, type: 3}
+  - {fileID: 8300000, guid: 685ab379e5a1aa64e800452999f567e9, type: 3}
+  - {fileID: 8300000, guid: 6d5d4aaf624d4cd4aaded2677cf01e51, type: 3}
+  - {fileID: 8300000, guid: 8715363a9599794468cb00bce10aa4f2, type: 3}
 --- !u!212 &212350519076262996
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -855,7 +877,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.7}
-  m_ConnectedAnchor: {x: 0.00000011920929, y: 0.00000017881393}
+  m_ConnectedAnchor: {x: 0, y: 0.00000017881393}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
