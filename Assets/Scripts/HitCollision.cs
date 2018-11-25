@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class HitCollision : MonoBehaviour {
 
+    public AudioClip[] hitBodySounds;
+    private AudioSource source;
+
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+
     void OnTriggerEnter2D(Collider2D col) {
         var unit = col.GetComponent<Unit>();
         if (unit == null) {
@@ -11,7 +20,8 @@ public class HitCollision : MonoBehaviour {
         }
 
         if (col.gameObject.tag == "Player1" || col.gameObject.tag == "Player2") {
-            FindObjectOfType<AudioManager>().Play("HitBodyWithWeapon");
+            source.clip = hitBodySounds[Random.Range(0, hitBodySounds.Length)];
+            source.Play();
         }
         float speed = GetComponent<Rigidbody2D>().velocity.magnitude;   
         unit.Hit(speed);
