@@ -9,51 +9,43 @@ public class ShotGun : MonoBehaviour {
 
     [Header("Настройки дробовика")]
     [SerializeField] private float angle = 45;
-    [SerializeField] private int bulletCount = 5;
+    [SerializeField] private int bulletSpray = 5;
 
     public AudioClip[] shotgunSounds;
     private AudioSource source;
 
-    bool left;
-    bool right;
+    private int bulletCount = 2;
+    [SerializeField] private float cooldown = 2;
 
     void Start()
     {
+        // Play Reload Sound
+
         source = GetComponent<AudioSource>();
     }
 
     public void Shoot() {
-        Vector3 startingRotation = transform.rotation.eulerAngles;
-        startingRotation.z -= angle / 2;
-        for(int i = 0;i < bulletCount;i++) {
-            Instantiate(bullet, spawnPosition.position, Quaternion.Euler(startingRotation));
-            startingRotation.z += angle / bulletCount;
-        }
-        source.clip = shotgunSounds[Random.Range(0, shotgunSounds.Length)];
-        source.Play();
-     }
-
-    private void Update() {
-        if (transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 360) {
-            if (!left) {
-                left = true;
-                right = false;
-                Rotate();
+        if (bulletCount > 0) {
+            Vector3 startingRotation = transform.rotation.eulerAngles;
+            startingRotation.z -= angle / 2;
+            for (int i = 0; i < bulletSpray; i++) {
+                Instantiate(bullet, spawnPosition.position, Quaternion.Euler(startingRotation));
+                startingRotation.z += angle / bulletSpray;
+            }
+            source.clip = shotgunSounds[Random.Range(0, shotgunSounds.Length)];
+            source.Play();
+            bulletCount--;
+            if(bulletCount<=0) {
+                StartCoroutine(Reload());
             }
         }
-        else if (!right){
-            left = false;
-            right = true;
-            Rotate();
-        }
     }
 
-    private void Rotate() {
-        Vector3 position = transform.localPosition;
-        Vector3 scale = transform.localScale;
-        position.x = -position.x;
-        scale.x = -scale.x;
-        transform.localPosition = position;
-        transform.localScale = scale;
+    IEnumerator Reload() {
+        // Play Reload Sound
+        yield return new WaitForSeconds(cooldown);
+        bulletCount = 2;
     }
+
+
 }
