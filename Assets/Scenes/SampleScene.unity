@@ -228,7 +228,7 @@ Prefab:
     - target: {fileID: 114670836163973656, guid: 1234dff576c9c4ad08af0443bc2d5e22,
         type: 2}
       propertyPath: spawnWait
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1234dff576c9c4ad08af0443bc2d5e22, type: 2}
@@ -497,7 +497,12 @@ Prefab:
     - target: {fileID: 114670836163973656, guid: 1234dff576c9c4ad08af0443bc2d5e22,
         type: 2}
       propertyPath: spawnWait
-      value: 10
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114670836163973656, guid: 1234dff576c9c4ad08af0443bc2d5e22,
+        type: 2}
+      propertyPath: enemiesCount
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1234dff576c9c4ad08af0443bc2d5e22, type: 2}
@@ -1391,7 +1396,7 @@ Prefab:
     - target: {fileID: 114670836163973656, guid: 1234dff576c9c4ad08af0443bc2d5e22,
         type: 2}
       propertyPath: spawnWait
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1234dff576c9c4ad08af0443bc2d5e22, type: 2}
