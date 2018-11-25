@@ -340,7 +340,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!50 &50662694621728690
 Rigidbody2D:
@@ -539,26 +539,14 @@ MonoBehaviour:
   handContainer: {fileID: 4880509710078504}
   force: 285
   impulse: 0
-  playerNo: 0
   speed: 10
   maxEnergy: 150
+  currentEnergy: 0
   energyDecreaseSpeed: 12
   energyHitCost: 10
   energyRegen: 8
   multEnergy: 4
   speedDebuf: 0.7
-  healthBar: {fileID: 0}
-  energyBar: {fileID: 0}
-  fullHealth: {r: 0.04971528, g: 1, b: 0, a: 1}
-  halfHealth: {r: 1, g: 0.924858, b: 0, a: 1}
-  lowHealth: {r: 0.8113208, g: 0, b: 0, a: 1}
-  keyLeft: 97
-  keyRight: 100
-  keyUp: 119
-  keyDown: 115
-  keyRotateLeft: 99
-  keyRotateRight: 118
-  keyUse: 98
   imageLeft: {fileID: 21300000, guid: c5dc40660457aa546a8ecbd64845cbd2, type: 3}
   imageRight: {fileID: 21300000, guid: 998fa654d53e6f5438afeca6b4821ba6, type: 3}
   imageUp: {fileID: 21300000, guid: 767972aa2b10f8748b6a91b4afa1e769, type: 3}

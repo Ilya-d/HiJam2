@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 82973922558894388}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &58872684735205396
 CircleCollider2D:
@@ -266,9 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   walkSounds:
-  - {fileID: 8300000, guid: 4b337c13277daa6488a9ddb78d24c297, type: 3}
-  - {fileID: 8300000, guid: e09058e1469b16b4ca93723e75cfea12, type: 3}
-  - {fileID: 8300000, guid: dfdc10674a1d59a4c85627ecf8d2d0f4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   sp: {fileID: 212757698073491624}
   imageLeft: {fileID: 21300000, guid: a9884f0023322694fa3164969fca80f7, type: 3}
   imageRight: {fileID: 21300000, guid: d6517f7ed09b0844db0b2d650d8b9a0c, type: 3}
