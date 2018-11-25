@@ -14,7 +14,7 @@ public class Sound {
     [Range(.1f, 3f)]
     public float pitch;
     [Range(0, 256)]
-    public float priority;
+    public int priority;
 
     public bool loop;
     
