@@ -290,6 +290,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c9ff661bcab3165479ea0406f5c1bcfc, type: 3}
   - {fileID: 8300000, guid: f283bdf811a5d204883b523267926d30, type: 3}
   - {fileID: 8300000, guid: be7355c05fd8e5046901a7dfc8d2d168, type: 3}
+  - {fileID: 8300000, guid: 2588cddb08ff7e84aa659154872a583f, type: 3}
+  - {fileID: 8300000, guid: 9f044cb80631ea64baf6fe7349ca4982, type: 3}
+  - {fileID: 8300000, guid: 4cbec6fe87c0aa3449aec9a58af08144, type: 3}
+  - {fileID: 8300000, guid: 11e4f2a6f94674a47bb3a0a5cf27d09c, type: 3}
+  - {fileID: 8300000, guid: 4a0401551c4249e43affeb1f78ea0d51, type: 3}
+  - {fileID: 8300000, guid: a578e492a49f3ae48b813d77e88bbf4b, type: 3}
+  - {fileID: 8300000, guid: 14d2ac29db072bc498183d153c5d303d, type: 3}
+  - {fileID: 8300000, guid: bce5472f8d3c01645883bfefef1437e9, type: 3}
+  - {fileID: 8300000, guid: 3402541c7c972ad48bbc17e44da19703, type: 3}
+  - {fileID: 8300000, guid: 3befe98e7f0d94e42bffd87e9d3cef24, type: 3}
 --- !u!212 &212087070441358970
 SpriteRenderer:
   m_ObjectHideFlags: 1
