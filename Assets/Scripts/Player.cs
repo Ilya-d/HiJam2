@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private Rigidbody2D handRb;
     [SerializeField] private Transform handContainer;
+    [SerializeField] private AudioSource stepsSound;
 
     [SerializeField] private float force = 50;
 
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour {
         currentSpeed = speed;
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
+        stepsSound = GetComponent<AudioSource>();
     }
 
     void FixedUpdate() {
@@ -235,7 +237,7 @@ public class Player : MonoBehaviour {
         }
     }
     animation.enabled = isMoving;
-
+    stepsSound.enabled = isMoving;
 
 }
 }
