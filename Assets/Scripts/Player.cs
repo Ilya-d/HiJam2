@@ -86,7 +86,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Attack() {
-       // if (currentWeapon == WeaponType.melee) {
+        if (currentWeaponType != WeaponsManager.WeaponType.Shotgun) {
             if (Input.GetKeyDown(keyRotateLeft)) {
                 handRb.AddTorque(force, ForceMode2D.Impulse);
             }
@@ -108,10 +108,7 @@ public class Player : MonoBehaviour {
             else if (Input.GetKey(keyRotateRight)) {
                 handRb.AddTorque(-force / 5, ForceMode2D.Force);
             }
-     //   }
-
-
-       
+        }
     }
 
     private void Movement() {

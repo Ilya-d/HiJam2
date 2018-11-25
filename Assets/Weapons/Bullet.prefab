@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
-  livingTime: 1.5
+  livingTime: 1
 --- !u!136 &136576525744867420
 CapsuleCollider:
   m_ObjectHideFlags: 1

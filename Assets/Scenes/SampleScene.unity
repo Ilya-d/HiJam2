@@ -438,6 +438,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ef3014b563f954e80035f6d74208d2, type: 2}
   m_IsPrefabAsset: 0
@@ -563,6 +568,11 @@ Prefab:
         type: 2}
       propertyPath: playerNo
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ef3014b563f954e80035f6d74208d2, type: 2}
