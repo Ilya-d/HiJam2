@@ -1019,6 +1019,11 @@ Prefab:
       propertyPath: m_ConnectedAnchor.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f2ef2e0c67a816c449d64cd5ec4e3479, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ef3014b563f954e80035f6d74208d2, type: 2}
   m_IsPrefabAsset: 0
@@ -1242,6 +1247,11 @@ Prefab:
       propertyPath: energyBar
       value: 
       objectReference: {fileID: 47598832}
+    - target: {fileID: 82069422979020172, guid: 90ef3014b563f954e80035f6d74208d2,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 76aea85a8954fb14698eca3537862c19, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ef3014b563f954e80035f6d74208d2, type: 2}
   m_IsPrefabAsset: 0
@@ -1550,9 +1560,49 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4822156346019386, guid: 045f645908d144d4e90ee9dc40caafab, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d9c00e80ef9e73a41b3c7cb2a5b022df, type: 3}
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 860a0d9b3ca43f640ba1906cb170bf44, type: 3}
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.data[3].name
+      value: StepForest1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8659723acad0d4541a6054dc4fdf40cd, type: 3}
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.data[3].volume
+      value: 0.573
+      objectReference: {fileID: 0}
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114274059141978420, guid: 045f645908d144d4e90ee9dc40caafab,
+        type: 2}
+      propertyPath: sounds.Array.data[3].loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 045f645908d144d4e90ee9dc40caafab, type: 2}
