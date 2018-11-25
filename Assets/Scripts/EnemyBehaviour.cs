@@ -59,10 +59,10 @@ public class EnemyBehaviour : MonoBehaviour {
             return;
         }
 
-        distanceToTarget = Vector2.Distance(transform.position, target.position);
+        distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
         
         if (distanceToTarget > 1.2f && !isAttacking) {
-            Move(target);
+            Move(currentTarget);
         }
         else if (!isAttacking) {
             Hit();
