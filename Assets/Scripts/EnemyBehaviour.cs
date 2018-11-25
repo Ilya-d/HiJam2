@@ -21,6 +21,8 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private Animator animator;
 
+    [SerializeField] float damage = 10f;
+
     [SerializeField] private float attackCooldown = .5f;
     float distanceToTarget;
 
@@ -59,10 +61,10 @@ public class EnemyBehaviour : MonoBehaviour {
     IEnumerator waitForHit() {
         isAttacking = true;
         while (distanceToTarget < 1.2f) {
-            Debug.Log(distanceToTarget);
+            
             //ВОТ СЮДА ВСТАВЛЯТЬ МУЗЫКУ
 
-            currentPlayer.Hit(10);
+            currentPlayer.Hit(damage);
             yield return new WaitForSeconds(attackCooldown);
             animator.SetBool("Walk", false);
         }
