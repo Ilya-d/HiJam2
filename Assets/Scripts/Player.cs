@@ -52,10 +52,10 @@ public class Player : Unit {
     private Weapon currentWeapon;
     private ResourceManager.WeaponType currentWeaponType;
 
-    [SerializeField] private Sprite imageLeft;
-    [SerializeField] private Sprite imageRight;
-    [SerializeField] private Sprite imageUp;
-    [SerializeField] private Sprite imageDown;
+    private Sprite[] playerSprites;
+
+    [SerializeField] private Sprite[] player1Sprites;
+    [SerializeField] private Sprite[] player2Sprites;
 
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator animation;
@@ -68,7 +68,7 @@ public class Player : Unit {
 
     void Start() {
         rb2 = GetComponent<Rigidbody2D>();
-        SetWeapon(ResourceManager.WeaponType.Hammer);
+        SetWeapon(ResourceManager.WeaponType.ChainedHammer);
         currentSpeed = speed;
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
@@ -79,6 +79,12 @@ public class Player : Unit {
     public void Init(PlayerNumbers number) {
         playerNumber = number;
         controlls = ResourceManager.instance.playersControlls[(int)playerNumber];
+        if (number == PlayerNumbers.player1) {
+            playerSprites = player1Sprites;
+        } else {
+            playerSprites = player2Sprites;
+        }
+        playerSprite.sprite = playerSprites[3];
     }
 
     void FixedUpdate() {
@@ -203,11 +209,11 @@ public class Player : Unit {
 
         if (Input.GetKey(controlls.keyRight)) {
             currentVelocity.x = currentSpeed;
-            playerSprite.sprite = imageRight;
+            playerSprite.sprite = playerSprites[1];
         }
         else if (Input.GetKey(controlls.keyLeft)) {
             currentVelocity.x = -currentSpeed;
-            playerSprite.sprite = imageLeft;
+            playerSprite.sprite = playerSprites[0];
         }
         else {
             currentVelocity.x = 0;
@@ -215,11 +221,11 @@ public class Player : Unit {
 
         if (Input.GetKey(controlls.keyUp)) {
             currentVelocity.y = currentSpeed;
-            playerSprite.sprite = imageUp;
+            playerSprite.sprite = playerSprites[2];
         }
         else if (Input.GetKey(controlls.keyDown)) {
             currentVelocity.y = -currentSpeed;
-            playerSprite.sprite = imageDown;
+            playerSprite.sprite = playerSprites[3];
         }
         else {
             currentVelocity.y = 0;

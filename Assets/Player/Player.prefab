@@ -547,10 +547,16 @@ MonoBehaviour:
   energyRegen: 8
   multEnergy: 4
   speedDebuf: 0.7
-  imageLeft: {fileID: 21300000, guid: c5dc40660457aa546a8ecbd64845cbd2, type: 3}
-  imageRight: {fileID: 21300000, guid: 998fa654d53e6f5438afeca6b4821ba6, type: 3}
-  imageUp: {fileID: 21300000, guid: 767972aa2b10f8748b6a91b4afa1e769, type: 3}
-  imageDown: {fileID: 21300000, guid: 05d46270f3d069148ab89c39cac1b776, type: 3}
+  player1Sprites:
+  - {fileID: 21300000, guid: c5dc40660457aa546a8ecbd64845cbd2, type: 3}
+  - {fileID: 21300000, guid: 998fa654d53e6f5438afeca6b4821ba6, type: 3}
+  - {fileID: 21300000, guid: 767972aa2b10f8748b6a91b4afa1e769, type: 3}
+  - {fileID: 21300000, guid: 05d46270f3d069148ab89c39cac1b776, type: 3}
+  player2Sprites:
+  - {fileID: 21300000, guid: 9f208b5dd291b2643817aaf2dfa999b3, type: 3}
+  - {fileID: 21300000, guid: 175b4acb757778c44a811d81aec53e37, type: 3}
+  - {fileID: 21300000, guid: 1c99c205266021a4381ccdbb65602c8c, type: 3}
+  - {fileID: 21300000, guid: 623b0c3b704c0f7419738af6113089ad, type: 3}
   playerSprite: {fileID: 212539298583250558}
   animation: {fileID: 95155084317048856}
   pickupNotify: {fileID: 1754250257649424}
