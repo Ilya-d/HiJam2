@@ -145,7 +145,6 @@ public class Player : Unit {
             case UsableItem.ItemType.Weapon:
                 ResourceManager.instance.CreatePickup(UsableItem.ItemType.Weapon, (int)currentWeapon.weaponType, transform.position);
                 SetWeapon((ResourceManager.WeaponType)itemOnFloor.value);
-                Destroy(itemOnFloor.gameObject);
                 break;
             case UsableItem.ItemType.Player:
                 ResourceManager.instance.SpawnPlayer((PlayerNumbers)item.value, transform.position);
@@ -154,7 +153,7 @@ public class Player : Unit {
                 Debug.LogError("Unhandled item use: " + item.itemType);
                 break;
         }
-
+        Destroy(itemOnFloor.gameObject);
         itemOnFloor = null;
     }
 
