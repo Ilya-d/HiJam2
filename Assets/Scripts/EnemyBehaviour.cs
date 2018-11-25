@@ -126,7 +126,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public void OnWalkSound()
     {
-        source.clip = walkSounds[Random.Range(0, walkSounds.Length)];
+        source.clip = walkSounds[Random.Range(0, walkSounds.Length - 1)];
         source.Play();
     }
 
