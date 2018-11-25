@@ -7,7 +7,11 @@ public class EnemyBehaviour : MonoBehaviour {
     private Vector3 target;
     public float speed;
 
-    public Player[] players;
+    private Player[] players;
+
+    void Start() {
+        players = FindObjectsOfType<Player>();
+    }
 	
 	void Update () {
         target = FindNearestTarget();

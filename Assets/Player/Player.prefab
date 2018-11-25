@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4880509710078504}
   - component: {fileID: 50662694621728690}
   - component: {fileID: 233840123954613352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 50409859471983178}
   - component: {fileID: 114528522892863300}
   - component: {fileID: 70139745554401398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 95155084317048856}
   - component: {fileID: 82387302518144576}
   - component: {fileID: 114829264294097518}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4293130089741040}
   - component: {fileID: 23464860684128500}
   - component: {fileID: 102246765935869050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PickupNotify
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4221155450310144}
   - component: {fileID: 212350519076262996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4132982068310178}
   - component: {fileID: 212357431647907862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,14 +533,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077701ed5d053af4bade39acabd22269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 400
   handRb: {fileID: 50662694621728690}
   handContainer: {fileID: 4880509710078504}
-  stepsSound: {fileID: 0}
   force: 285
   impulse: 0
   playerNo: 0
   speed: 10
-  maxHealth: 400
   maxEnergy: 150
   energyDecreaseSpeed: 12
   energyHitCost: 10

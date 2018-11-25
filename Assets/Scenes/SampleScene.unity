@@ -312,7 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 457299932}
   - component: {fileID: 457299931}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: top_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba85909af3468d4cb40a572344a9f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 10
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 680275075}
   - component: {fileID: 680275074}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: left_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 925417920}
   - component: {fileID: 925417919}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bottom_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1161752964}
   - component: {fileID: 1161752963}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: right_border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
