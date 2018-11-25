@@ -8,6 +8,9 @@ public class EnemyBehaviour : MonoBehaviour {
     private Player currentPlayer;
     public float speed;
 
+    public AudioClip[] walkSounds;
+    private AudioSource source;
+
     private Player[] players;
 
     private bool isMoving;
@@ -29,6 +32,7 @@ public class EnemyBehaviour : MonoBehaviour {
     private void Start() {
         players = new Player[2];
         animator = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
         //Так совсем не надо делать
         players[0] = GameObject.FindGameObjectWithTag("Player1").GetComponent<Player>();
         players[1] = GameObject.FindGameObjectWithTag("Player2").GetComponent<Player>();
@@ -107,5 +111,12 @@ public class EnemyBehaviour : MonoBehaviour {
             sp.sprite = dir.y > 0 ? imageDown : imageUp;
         }
 
+    }
+
+
+    public void OnWalkSound()
+    {
+        source.clip = walkSounds[Random.Range(0, walkSounds.Length)];
+        source.Play();
     }
 }
