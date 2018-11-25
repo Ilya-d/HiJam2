@@ -26,7 +26,9 @@ public class AudioManager : MonoBehaviour {
 
     void Start () {
 
-        Play("Theme");
+        Play("GameplayTheme");
+        Play("ForestAmb");
+        Play("RoundStart");
 
     }
 	
