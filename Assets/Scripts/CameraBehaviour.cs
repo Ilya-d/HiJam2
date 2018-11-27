@@ -7,8 +7,9 @@ public class CameraBehaviour : MonoBehaviour {
     private Transform player1;
     private Transform player2;
     public float speed;
-    private Camera camera;
+    private Camera cam;
     private float cameraSize;
+    private float originalCameraSize;
 
     void Awake() {
         EventsManager.Subscribe(EventsManager.EventType.PlayerSpawn, OnPlayerSpawn);
@@ -20,8 +21,8 @@ public class CameraBehaviour : MonoBehaviour {
         foreach (var player in players) {
             OnPlayerSpawn(player);
         }*/
-        camera = gameObject.GetComponent<Camera>();
-        cameraSize = 10f;
+        cam = gameObject.GetComponent<Camera>();
+        cameraSize = originalCameraSize = cam.orthographicSize;
     }
 
     private void OnPlayerSpawn(object o) {
@@ -42,13 +43,17 @@ public class CameraBehaviour : MonoBehaviour {
         if (number == Player.PlayerNumbers.player1) {
             player1 = null;
         }
-        if (number == Player.PlayerNumbers.player1) {
+        if (number == Player.PlayerNumbers.player2) {
             player2 = null;
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (player1 == null && player2 == null) {
+            return;
+        }
+
         float move = speed * Time.deltaTime;
         var targetCameraPos = transform.position;
         if (player1 != null && player2 != null) {
@@ -58,25 +63,18 @@ public class CameraBehaviour : MonoBehaviour {
         } else if (player2 != null) {
             targetCameraPos = player2.position;
         }
-
         targetCameraPos.z = transform.position.z;
-
         gameObject.transform.position = Vector3.MoveTowards(transform.position, targetCameraPos, move);
 
-
-        if (player1 == null || player2 == null || Vector3.Distance(player1.position, player2.position) <= 18f)
-        {
-            cameraSize = 10f;
+        var lowerDistance = 30f;
+        var higherDistance = lowerDistance * 1.5f;
+        if (player1 == null || player2 == null || Vector3.Distance(player1.position, player2.position) <= lowerDistance) {
+            cameraSize = originalCameraSize;
+        } else if (Vector3.Distance(player1.position, player2.position) > lowerDistance && Vector3.Distance(player1.position, player2.position) < higherDistance) {
+            cameraSize = (Vector3.Distance(player1.position, player2.position)) / 2f;
+        } else {
+            cameraSize = originalCameraSize*1.5f;
         }
-        else if (Vector3.Distance(player1.position, player2.position) > 18f && Vector3.Distance(player1.position, player2.position) < 36f)
-        {
-            cameraSize = (Vector3.Distance(player1.position, player2.position)) / 1.8f;
-        }
-        else {
-            cameraSize = 20f;
-        }
-
-
-        camera.orthographicSize = cameraSize;
+        cam.orthographicSize = cameraSize;
     }
 }

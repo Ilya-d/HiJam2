@@ -60,7 +60,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
         distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
         
-        if (distanceToTarget > 1.3f && !isAttacking) {
+        if (distanceToTarget > 2.3f && !isAttacking) {
             Move(currentTarget);
         }
         else if (!isAttacking) {
@@ -75,7 +75,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     IEnumerator waitForHit() {
         isAttacking = true;
-        while (distanceToTarget < 1.3f) {
+        while (distanceToTarget < 2.3f) {
 
             yield return new WaitForSeconds(attackCooldown);
         }

@@ -58,7 +58,7 @@ public class Player : Unit {
     [SerializeField] private Sprite[] player2Sprites;
 
     [SerializeField] private SpriteRenderer playerSprite;
-    [SerializeField] private Animator animation;
+    [SerializeField] private Animator animator;
     [SerializeField] private GameObject pickupNotify;
 
     private PlayerControlsConfig controlls;
@@ -241,7 +241,7 @@ public class Player : Unit {
                 isMoving = false;
             }
         }
-        animation.enabled = isMoving;
+        animator.enabled = isMoving;
 
     }
 

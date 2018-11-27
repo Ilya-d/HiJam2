@@ -17,11 +17,9 @@ public class Unit : MonoBehaviour {
     public void Hit(float weaponSpeed) {
         if(weaponSpeed > 10) {
             currentHealth -= 15;
-        }
-        else if(weaponSpeed > 5) {
+        } else if(weaponSpeed > 5) {
             currentHealth -= 10;
-        }
-        else if(weaponSpeed > 2) {
+        } else if(weaponSpeed > 2) {
             currentHealth -= 5;
         }
         if (currentHealth <= 0) {
