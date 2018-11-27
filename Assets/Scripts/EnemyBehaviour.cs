@@ -11,10 +11,10 @@ public class EnemyBehaviour : MonoBehaviour {
     private List<Player> players = new List<Player>();
     public AudioClip[] walkSounds;
 
-    private bool isMoving;
     private bool isAttacking = false;
 
     [SerializeField] private SpriteRenderer sp;
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Sprite imageLeft;
     [SerializeField] private Sprite imageRight;
     [SerializeField] private Sprite imageUp;
@@ -26,7 +26,8 @@ public class EnemyBehaviour : MonoBehaviour {
 
     [SerializeField] float damage = 10f;
 
-    [SerializeField] private float attackCooldown = .5f;
+    [SerializeField] private float attackCooldown = 0.5f;
+    private float attackTimeLeft;
     float distanceToTarget;
 
     private void Start() {
@@ -36,12 +37,12 @@ public class EnemyBehaviour : MonoBehaviour {
         EventsManager.Subscribe(EventsManager.EventType.PlayerSpawn, OnPlayerDeath);
     }
 
-	private void OnDestroy() {
+    private void OnDestroy() {
         EventsManager.Unsubscribe(EventsManager.EventType.PlayerSpawn, OnPlayerSpawn);
         EventsManager.Unsubscribe(EventsManager.EventType.PlayerSpawn, OnPlayerDeath);
-	}
+    }
 
-	private void OnPlayerSpawn(object o) {
+    private void OnPlayerSpawn(object o) {
         var player = (Player)o;
         players.Add(player);
     }
@@ -49,50 +50,44 @@ public class EnemyBehaviour : MonoBehaviour {
     private void OnPlayerDeath(object o) {
         var player = (Player)o;
         players.Remove(player);
-        
+
     }
 
-    void Update () {
+    private void FixedUpdate() {
         currentTarget = FindNearestTarget();
         if (currentTarget == null) {
             return;
         }
 
         distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
-        
-        if (distanceToTarget > 2.3f && !isAttacking) {
+
+        if (distanceToTarget > 2.3f && attackTimeLeft <= 0) {
             Move(currentTarget);
+            isAttacking = false;
         }
-        else if (!isAttacking) {
-            Hit();
+        else if (attackTimeLeft >= 0) {
+            attackTimeLeft -= Time.deltaTime;
         }
-    }
-
-    private void Hit() {
-        animator.SetBool("Walk", false);
-        StartCoroutine(waitForHit());
-    }
-
-    IEnumerator waitForHit() {
-        isAttacking = true;
-        while (distanceToTarget < 2.3f) {
-
-            yield return new WaitForSeconds(attackCooldown);
+        else {
+            currentPlayer.Hit(damage);
+            attackTimeLeft = attackCooldown;
+            isAttacking = true;
         }
-        isAttacking = false;
-        animator.SetBool("Walk", true);
+
+        animator.SetFloat("distanceToTarget", distanceToTarget);
+        animator.SetBool("isAtacking", isAttacking);
     }
 
     private Transform FindNearestTarget() {
         Transform nearestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
 
-        for(int i = 0;i<players.Count;i++) {
-            if(players[i] == null) {
+        for (int i = 0; i < players.Count; i++) {
+            if (players[i] == null) {
                 continue;
             }
 
-            if(players[i].isAlive) {
+            if (players[i].isAlive) {
                 Vector3 directionToTarget = players[i].PlayerTransform.position - transform.position;
                 float dSqrToTarget = directionToTarget.sqrMagnitude;
                 if (dSqrToTarget < closestDistanceSqr) {
@@ -106,31 +101,30 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     private void Move(Transform target) {
-        animator.SetBool("Walk", true);
-        float move = speed * Time.deltaTime;
-        gameObject.transform.position = Vector2.MoveTowards(transform.position, target.position, move);
 
-        Vector3 dir = (transform.position - target.position).normalized;
+        Vector3 dir = (target.position - transform.position).normalized;
+        rb.MovePosition(rb.transform.position + dir * speed * Time.deltaTime);
+
         if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y)) {
-            sp.sprite = dir.x > 0 ? imageLeft: imageRight;
+            sp.sprite = dir.x > 0 ? imageRight : imageLeft;
         }
         else {
-            sp.sprite = dir.y > 0 ? imageDown : imageUp;
+            sp.sprite = dir.y > 0 ? imageUp : imageDown;
         }
+    }
 
+    // Не доделал. Идея в том чтобы прыгнуть в игрока и при Collider Collision нанести урон.
+    // Не уверен как это будет работать. Если будет много мобов то будет каша
+    private void HitPLayer(Vector3 targetPosition) {
+        Vector2 dir = (transform.position - targetPosition).normalized;
     }
 
     void OnDeath() {
-        
+
     }
 
-    public void OnWalkSound()
-    {
+    public void OnWalkSound() {
         source.clip = walkSounds[Random.Range(0, walkSounds.Length - 1)];
         source.Play();
-    }
-
-    public void OnEnemyHit() {
-        currentPlayer.Hit(damage);
     }
 }

@@ -12,16 +12,17 @@ public class ShotGun : MonoBehaviour {
     [SerializeField] private int bulletSpray = 5;
 
     public AudioClip[] shotgunSounds;
+    [SerializeField] AudioClip shotGunReload;
     private AudioSource source;
 
     private int bulletCount = 2;
     [SerializeField] private float cooldown = 2;
+    private float cooldownLeft = 0;
 
     void Start()
     {
-        // Play Reload Sound
-
         source = GetComponent<AudioSource>();
+        source.PlayOneShot(shotGunReload);
     }
 
     public void Shoot() {
@@ -42,8 +43,9 @@ public class ShotGun : MonoBehaviour {
     }
 
     IEnumerator Reload() {
-        // Play Reload Sound
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(cooldown - shotGunReload.length);
+        source.PlayOneShot(shotGunReload);
+        yield return new WaitForSeconds(shotGunReload.length);
         bulletCount = 2;
     }
 

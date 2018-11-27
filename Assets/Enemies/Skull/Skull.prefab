@@ -286,6 +286,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   sp: {fileID: 212757698073491624}
+  rb: {fileID: 50226319910616176}
   imageLeft: {fileID: 21300000, guid: a9884f0023322694fa3164969fca80f7, type: 3}
   imageRight: {fileID: 21300000, guid: d6517f7ed09b0844db0b2d650d8b9a0c, type: 3}
   imageUp: {fileID: 21300000, guid: 89b5b68835ee6be43a1e70b190d7216a, type: 3}

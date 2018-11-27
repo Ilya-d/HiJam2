@@ -55,7 +55,7 @@ Transform:
   m_GameObject: {fileID: 1048156257073798}
   m_LocalRotation: {x: -0, y: -0, z: -0.00000008940697, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: -0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4945536396534138}
   m_Father: {fileID: 0}
@@ -219,6 +219,7 @@ MonoBehaviour:
   shotgunSounds:
   - {fileID: 8300000, guid: 42f26efdbfb001842b567943411476e5, type: 3}
   - {fileID: 8300000, guid: ebeea0f1313503542b07b1cb0008144b, type: 3}
+  shotGunReload: {fileID: 8300000, guid: fc9e9a5eaaa2eb946b31e30ad92c13d4, type: 3}
   cooldown: 2
 --- !u!212 &212592062571509782
 SpriteRenderer:
@@ -280,6 +281,6 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.64569116, y: -1.3383181}
-  m_ConnectedAnchor: {x: -0.3228457, y: 0.060841262}
+  m_ConnectedAnchor: {x: 0.32284546, y: -0.16915911}
   m_DampingRatio: 0
   m_Frequency: 0
